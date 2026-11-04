@@ -9,14 +9,16 @@ const show_inline = Ref(true)
 
 inline!(value) = (show_inline[] = value)
 
-function popout(f; inline = show_inline[])
+function popout(f; inline = show_inline[], kwargs...)
     if inline
         display(f)
     end
-    screen = GLMakie.Screen(title = "Figure $(figure_count[] += 1)")
+    n = figure_count[] += 1
+    opts = merge((title = "Figure $n",), kwargs)
+    screen = GLMakie.Screen(; opts...)
     display(screen, f)
 end
 
-popout(; inline) = f -> (popout(f; inline))
+popout(; kwargs...) = f -> (popout(f; kwargs...))
 
 end
