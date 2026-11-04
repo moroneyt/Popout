@@ -8,6 +8,7 @@ const figure_count = Ref(0)
 const show_inline = Ref(true)
 const inspect_mode = Ref(true)
 
+reset_count!() = (figure_count[] = 0)
 inline!(value) = (show_inline[] = value)
 inspect!(value) = (inspect_mode[] = value)
 
