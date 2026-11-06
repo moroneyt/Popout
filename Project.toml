@@ -1,6 +1,6 @@
 name = "Popout"
 uuid = "47c4ba9d-4387-481e-9b31-56531f32c80e"
-version = "0.2.0"
+version = "0.3.0"
 authors = ["Tim Moroney <t.moroney@qut.edu.au>"]
 
 [deps]

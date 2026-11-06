@@ -3,7 +3,8 @@ module Popout
 import GLMakie
 import ImageShow
 
-export popout
+export popout, snapshot
+public reset_count!, inline!, inspect!
 
 const figure_count = Ref(0)
 const show_inline = Ref(true)
@@ -22,7 +23,7 @@ function popout(f; inline = show_inline[], inspect = inspect_mode[], kwargs...)
     display(screen, f)
 
     if inline
-        display(copy(GLMakie.colorbuffer(screen)))
+        snapshot(screen)
     end
  
     if inspect
@@ -34,5 +35,11 @@ end
 
 # to allow chaining e.g. surface(randn(100, 100)) |> popout(title = "My Surface", inspect = true)
 popout(; kwargs...) = f -> popout(f; kwargs...)
+
+# Snapshot of the current figure
+snapshot(screen) = !isnothing(screen) && display(copy(GLMakie.colorbuffer(screen)))
+snapshot() = snapshot(getscreen(GLMakie.current_figure()))
+
+getscreen(f) = GLMakie.Makie.getscreen(f.scene, GLMakie)
 
 end
