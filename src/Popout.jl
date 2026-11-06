@@ -1,7 +1,7 @@
 module Popout
 
 import GLMakie
-import ImageShow, ImageIO
+import ImageShow
 
 export popout
 
@@ -27,7 +27,7 @@ function popout(f; inline = show_inline[], inspect = inspect_mode[], kwargs...)
     if inspect
         GLMakie.DataInspector(f)
     end
-    
+
     screen
 end
 
