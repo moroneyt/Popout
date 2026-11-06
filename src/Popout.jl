@@ -13,6 +13,7 @@ reset_count!() = (figure_count[] = 0)
 inline!(value) = (show_inline[] = value)
 inspect!(value) = (inspect_mode[] = value)
 
+# Popout a GLMakie figure into a new window, optionally displaying it inline in VS Code
 function popout(f; inline = show_inline[], inspect = inspect_mode[], kwargs...)
 
     n = figure_count[] += 1
@@ -31,6 +32,7 @@ function popout(f; inline = show_inline[], inspect = inspect_mode[], kwargs...)
     screen
 end
 
-popout(; kwargs...) = f -> (popout(f; kwargs...))
+# to allow chaining e.g. surface(randn(100, 100)) |> popout(title = "My Surface", inspect = true)
+popout(; kwargs...) = f -> popout(f; kwargs...)
 
 end
